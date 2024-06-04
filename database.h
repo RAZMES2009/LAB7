@@ -117,22 +117,15 @@ struct list
         myReadFile.close();
     }
 
-    list findElements(string target)
+    list findElements(string target, short field)
     {
         list resultList;
         Node *current = first;
 
         while (current != nullptr)
         {
-            for (uint8_t i = 0; i < 5; i++)
-            {
-                if (current->persons[i].find(target) != std::string::npos)
-                {
-                    resultList.pushBack(current->persons);
-                    break;
-                }
-            }
-
+            if (current->persons[field].find(target) != string::npos)
+                resultList.pushBack(current->persons);
             current = current->next;
         }
 

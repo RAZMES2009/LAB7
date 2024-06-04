@@ -15,6 +15,7 @@ int32_t menuChoice()
 
 void runApp()
 {
+    // system("chcp 1251");
     list newPerson;
     newPerson.readFromFile();
     while (1)
@@ -125,13 +126,39 @@ void userAddNewPerson(list &newPerson)
 
 void findEls(list &newPerson)
 {
+    cerr << "Введите поле, по которму осуществить поиск: " << endl
+         << "1 фамилия" << endl
+         << "2 имя" << endl
+         << "3 отчество" << endl
+         << "4 должность" << endl
+         << "5 адрес" << endl;
+    short field;
+    switch (menuChoice())
+    {
+    case 1:
+        field = 0;
+        break;
+    case 2:
+        field = 1;
+        break;
+    case 3:
+        field = 2;
+        break;
+    case 4:
+        field = 3;
+        break;
+    case 5:
+        field = 4;
+        break;
+    }
+
     cerr << "Введите символы, по которым осуществить поиск: ";
-    string field;
-    getline(cin, field);
-    list result = newPerson.findElements(field);
+    string word;
+    getline(cin, word);
+    list result = newPerson.findElements(word, field);
     if (!result.isEmpty())
     {
-        cerr << "\t*** Все совпавшие фамилии ***" << endl
+        cerr << "\t*** Все совпавшие поля ***" << endl
              << endl;
         for (Node *node = result.first; node != nullptr; node = node->next)
         {
